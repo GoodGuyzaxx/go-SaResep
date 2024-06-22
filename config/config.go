@@ -17,7 +17,7 @@ func LoadConfig() {
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
 
-	if err := viper.ReadConfig(); err != nil {
+	if err := viper.ReadInConfig(); err != nil {
 		panic(err)
 	}
 
