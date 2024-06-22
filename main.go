@@ -1,13 +1,24 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"go-saresep/config"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
+	config.LoadConfig()
+	config.LoadDataBase()
+
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
+	api := r.Group("/api")
+
+	api.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+
+	r.Run(fmt.Sprintf(":%v", config.ENV.PORT)) // listen and serve on 0.0.0.0:8000
 }
