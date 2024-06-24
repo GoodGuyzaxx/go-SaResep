@@ -4,7 +4,7 @@ import "go-saresep/dto"
 
 type ResponseWithData struct {
 	Code     int           `json:"code"`
-	Status   string        `json:"status"`
+	Success  bool          `json:"success"`
 	Message  string        `json:"message"`
 	Paginate *dto.Paginate `json:"paginate,omitempty"`
 	Data     any           `json:"data"`
@@ -12,24 +12,24 @@ type ResponseWithData struct {
 
 type ResponseWithNoData struct {
 	Code    int    `json:"code"`
-	Status  string `json:"satatus"`
+	Success bool   `json:"success"`
 	Message string `json:"message"`
 }
 
 func Response(params dto.ResponseParams) any {
 	var response any
-	var status string
+	var status bool
 
 	if params.StatusCode >= 200 && params.StatusCode <= 299 {
-		status = "sucess"
+		status = true
 	} else {
-		status = "failed"
+		status = false
 	}
 
 	if params.Data != nil {
 		response = &ResponseWithData{
 			Code:     params.StatusCode,
-			Status:   status,
+			Success:  status,
 			Message:  params.Message,
 			Paginate: params.Paginate,
 			Data:     params.Data,
@@ -37,7 +37,7 @@ func Response(params dto.ResponseParams) any {
 	} else {
 		response = &ResponseWithNoData{
 			Code:    params.StatusCode,
-			Status:  status,
+			Success: status,
 			Message: params.Message,
 		}
 	}
