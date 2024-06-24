@@ -1,4 +1,4 @@
-package controller
+package errorhandler
 
 type NotFoundError struct {
 	Message string

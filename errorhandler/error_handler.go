@@ -1,4 +1,4 @@
-package controller
+package errorhandler
 
 import (
 	"go-saresep/dto"
