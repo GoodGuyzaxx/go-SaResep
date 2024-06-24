@@ -7,7 +7,7 @@ import (
 )
 
 type AuthRepository interface {
-	EmailExist(emial string) bool
+	EmailExist(email string) bool
 	Register(req *entity.User) error
 }
 
