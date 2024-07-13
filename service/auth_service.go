@@ -41,7 +41,6 @@ func (s *authService) Register(req *dto.RegisterRequest) error {
 		Name:     req.Name,
 		Email:    req.Email,
 		Password: passwordHash,
-		Gender:   req.Gender,
 	}
 
 	if err := s.repository.Register(&user); err != nil {
